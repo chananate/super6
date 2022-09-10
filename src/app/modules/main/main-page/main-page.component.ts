@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GetdataService } from 'src/app/service/getdata.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-main-page',

@@ -27,14 +27,31 @@
           user management
           <br>
           <img width="800px" class="responsive" src="../../../../assets/img/flowchart_2.jpg">
-      </div>
+    
+
+          <p>eer works!</p>
+ก็ต้องมาไหม<br />
+----------- <br>
+<!-- <router-outlet>luu</router-outlet> -->
+<h *ngFor="let i of pList">
+  ชื่อ: {{ i.firstname }} {{ i.surename }}<br />
+
+  <div *ngIf="i.sex=='W'">  เพศ: หญิง</div>
+  <div *ngIf="i.sex=='M'">  เพศ: ชาย</div>
+</h>
+<button class="btn btn-outline">Regular</button>
+        </div>
+<!-- <div *ngFor="let item of userList">
+    <h2> {{item.depName}} </h2>
+    <clr-datagrid>
+      <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+      <clr-dg-column *ngFor="let type of typeList">{{type.lTypeName}} (วัน)</clr-dg-column>
+  
+      <clr-dg-row *ngFor="let user of item.item">
+        <clr-dg-cell>{{user.name}} {{user.surname}}</clr-dg-cell>
+        <clr-dg-cell *ngFor="let t of typeList">{{user[t.lTypeId]}} </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div> -->
 
     </div>
-    <!-- footer --> 
-    <footer style="background-color: rgb(148, 157, 182);">
-      <div style="color:black; margin: 1em;">
-        <b>Chananate Khamperngjai</b> |
-        <b>contact:</b> chananate.k@gmail.com
-      </div>
-    </footer>
-  </div>

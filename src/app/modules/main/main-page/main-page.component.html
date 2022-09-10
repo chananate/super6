@@ -1,47 +1,100 @@
 <div class="main-container">
-
-<!-- Header --> 
-<header class="header-6">
-  <div class="branding">
-    <a routerLink="/" class="nav-link">
+  <!-- Header -->
+  <header class="header-6">
+    <div class="branding">
+      <a routerLink="/" class="nav-link">
         <span class="title">Super6</span>
-    </a>
-</div>
-</header>
+      </a>
+    </div>
+  </header>
 
-    <!-- Sidebar --> 
+  <!-- Sidebar -->
   <div class="content-container">
     <clr-vertical-nav [clrVerticalNavCollapsible]="demoCollapsible">
       <a clrVerticalNavLink routerLinkActive="active" routerLink="/template">
-          Landing-page
+        Landing-page
       </a>
-      <a clrVerticalNavLink routerLinkActive="active" target="_blank" href="https://chananatek.wixsite.com/super5">
+      <a
+        clrVerticalNavLink
+        routerLinkActive="active"
+        target="_blank"
+        href="https://chananatek.wixsite.com/super5"
+      >
         UI-UX
-    </a>
-  </clr-vertical-nav>
-      <!-- Content --> 
-      <div class="content-area">
-          <h3>
-            Design Flowchart
-          </h3>
-          user management
-          <br>
-          <img width="800px" class="responsive" src="../../../../assets/img/flowchart_2.jpg">
-    
+      </a>
+    </clr-vertical-nav>
 
-          <p>eer works!</p>
-ก็ต้องมาไหม<br />
------------ <br>
-<!-- <router-outlet>luu</router-outlet> -->
-<h *ngFor="let i of pList">
-  ชื่อ: {{ i.firstname }} {{ i.surename }}<br />
+    <br />
+    <!-- รายชื่อคนที่ลา
+    <clr-datagrid *ngIf="userList">
+      <clr-dg-column>#</clr-dg-column>
+      <clr-dg-column [clrDgField]="'name'">ชื่อ</clr-dg-column>
+      <clr-dg-column [clrDgField]="'surname'">สกุล</clr-dg-column>
+      <clr-dg-column>วันที่ลา</clr-dg-column>
+      <clr-dg-column>ถึงวันที่</clr-dg-column>
+      <clr-dg-column>ประเภทที่ลา</clr-dg-column>
+      <clr-dg-row *clrDgItems="let user of userList; let i = index">
+        <clr-dg-cell>{{ i + 1 }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.name }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.surname }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.dateStart }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.dateEnd }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.lTypeName }}</clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        <b style="color: red">คนลาทั้งหมด {{ userList.length }} คน</b
+        >&nbsp;&nbsp;
+        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+          <clr-dg-page-size [clrPageSizeOptions]="[10, 15, 20, 25]"
+            >leave per page</clr-dg-page-size
+          >
+          {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+          {{ pagination.totalItems }} leave
+        </clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid> -->
+    <br /><br />
 
-  <div *ngIf="i.sex=='W'">  เพศ: หญิง</div>
-  <div *ngIf="i.sex=='M'">  เพศ: ชาย</div>
-</h>
-<button class="btn btn-outline">Regular</button>
+    <!--   
+  <h1>
+    รายงานสรุปวันลาจําแนกตามปีงบประมาณและเดือน
+  </h1>
+  <form>
+    <clr-input-container clrInline>
+      <label>รายงานสรุปวันลาจําแนกตามปีงบประมาณ (พุทธศักราช)</label>
+      <input clrInput placeholder="ex. 2562" name="searchYear" clrInput [(ngModel)]="searchYear" [(ngModel)]="search"
+        required />
+    </clr-input-container>
+    <div class="clr-form-control">
+      <label for="select-full" class="clr-control-label">ประจำเดือน</label>
+      <div class="clr-control-container">
+        <div class="clr-select-wrapper">
+          <select id="selectMonth" name="selectMonth" [(ngModel)]="selectMonth" class="clr-select">
+            <option value="1">มกราคม</option>
+            <option value="2">กุมภาพันธ์</option>
+            <option value="3">มีนาคม</option>
+            <option value="4">เมษายน</option>
+            <option value="5">พฤษภาคม</option>
+            <option value="6">มิถุนายน</option>
+            <option value="7">กรกฎาคม</option>
+            <option value="8">สิงหาคม</option>
+            <option value="9">กันยายน</option>
+            <option value="10">ตุลาคม</option>
+            <option value="11">พฤศจิกายน</option>
+            <option value="12">ธันวาคม</option>
+          </select>
+          <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
         </div>
-<!-- <div *ngFor="let item of userList">
+      </div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary" (click)="onSearch(searchYear,selectMonth)"
+      [disabled]="!searchYear ||searchYear.length != 4">ค้นหา
+    </button>
+  </form>
+  
+  
+  <div *ngFor="let item of userList">
     <h2> {{item.depName}} </h2>
     <clr-datagrid>
       <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
@@ -53,5 +106,29 @@
       </clr-dg-row>
     </clr-datagrid>
   </div> -->
+    <br />
+    <p>eer works!</p>
+    ก็ต้องมาไหม<br />
+    ----------- <br />
+    <!-- <router-outlet>luu</router-outlet> -->
+    <h *ngFor="let i of pList">
+      ชื่อ: {{ i.firstname }} {{ i.surename }}<br />
 
-    </div>
+      <div *ngIf="i.sex == 'W'">เพศ: หญิง</div>
+      <div *ngIf="i.sex == 'M'">เพศ: ชาย</div>
+    </h>
+    <button class="btn btn-outline">Regular</button>
+  </div>
+  <!-- <div *ngFor="let item of userList">
+    <h2> {{item.depName}} </h2>
+    <clr-datagrid>
+      <clr-dg-column>ชื่อ-นามสกุล</clr-dg-column>
+      <clr-dg-column *ngFor="let type of typeList">{{type.lTypeName}} (วัน)</clr-dg-column>
+  
+      <clr-dg-row *ngFor="let user of item.item">
+        <clr-dg-cell>{{user.name}} {{user.surname}}</clr-dg-cell>
+        <clr-dg-cell *ngFor="let t of typeList">{{user[t.lTypeId]}} </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div> -->
+</div>

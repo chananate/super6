@@ -7,9 +7,27 @@
       </a>
     </div>
   </header>
-  <button (click)="add()">ADD</button>
+  <!-- <my-date-picker
+    name="dateTest"
+    [(ngModel)]="dateTest"
+    required
+    ></my-date-picker> -->
+  <div class="clr-row-1">
+    {{ today }}
+    {{ dateTest }}<br />
+    <input
+      *ngIf="today"
+      type="date"
+      name="dateTest"
+      [value]="today"
+      [(ngModel)]="dateTest"
+    />
+    <!-- <br /> -->
+    <button class="btn btn-sm" (click)="testDate(dateTest)">ลองจ้า</button>
+    <button class="btn btn-sm" (click)="add()">ADD</button>
+  </div>
 
-  <div>
+  <div class="clr-col">
     <clr-datagrid *ngIf="pList">
       <clr-dg-column></clr-dg-column>
       <clr-dg-column>hn</clr-dg-column>
@@ -25,8 +43,10 @@
         <clr-dg-cell *ngIf="item.sex == 'M'">ชาย</clr-dg-cell>
         <clr-dg-cell>{{ item.dateShow }}</clr-dg-cell>
         <clr-dg-cell>
-          <button (click)="sendItem(item)">EDIT</button>
-          <button (click)="del(item.hn)">DELETE</button>
+          <button class="btn btn-outline" (click)="sendItem(item)">EDIT</button>
+          <button class="btn btn-danger-outline" (click)="del(item.hn)">
+            DELETE
+          </button>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
@@ -93,9 +113,11 @@
           [(ngModel)]="chge.sex"
         />
         <label>ชาย</label>
-      </clr-radio-wrapper>
-    </clr-radio-container>
-    <div class="clr-row">
+      </clr-radio-wrapper> </clr-radio-container
+    ><br />
+    <label><b>วันที่ </b></label>
+    <input type="date" name="date" value="chge.date" [(ngModel)]="chge.date" />
+    <!-- <div class="clr-row">
       <div class="clr-col-6">
         วันที่
         <my-date-picker-th
@@ -105,7 +127,7 @@
           required
         ></my-date-picker-th>
       </div>
-    </div>
+    </div> -->
   </div>
   <br />
   <div class="modal-footer">

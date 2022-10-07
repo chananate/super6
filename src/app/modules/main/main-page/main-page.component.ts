@@ -1,7 +1,10 @@
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
+import { AlertService } from "./../../../service/alert.service";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { GetdataService } from "src/app/service/getdata.service";
 import * as moment from "moment";
+import * as _ from 'lodash';
 
 @Component({
   selector: "app-main-page",
@@ -9,6 +12,7 @@ import * as moment from "moment";
   styleUrls: ["./main-page.component.scss"],
 })
 export class MainPageComponent implements OnInit {
+
   demoCollapsible = true;
   pList: any[] = [];
   name: any;
@@ -17,12 +21,19 @@ export class MainPageComponent implements OnInit {
   modalEdit = false;
   mode = "add";
   wrong = false;
+  today: any;
+  dateTest: any;
 
-  constructor(private router: Router, private patientSer: GetdataService) {}
+  constructor(
+    private router: Router,
+    private patientSer: GetdataService,
+    private alertSer: AlertService
+  ) {}
 
   ngOnInit() {
     this.getList();
-    moment.locale('th');
+    moment.locale("th");
+    // this.deb();
   }
 
   async getList() {
@@ -32,22 +43,38 @@ export class MainPageComponent implements OnInit {
       if (result.rows) {
         for (let item of result.rows) {
           // console.log(item.date);
-          if(item.date === null){
+          if (item.date === null) {
             item.dateShow = "-";
           } else {
-            item.dateShow = moment(item.date).add(543,'year').format('LL');
+            item.dateShow = await moment(item.date)
+              .add(543, "year")
+              .format("LL");
+            // item.date = moment(item.date).format("L");
           }
+          // console.log(item.date);
         }
+
         this.pList = result.rows;
       }
     } catch (err) {
       console.log(err);
     }
+    this.today = moment().format("YYYY-MM-DD");
+    // this.dateTest = this.today;
+    // this.today = moment().format("DD/MM/YYYY");
+    // console.log(this.dateTest);
+    console.log(_.size(this.today));
+    
+  }
+
+  testDate(item){
+    console.log(item);
   }
 
   deb() {
-    console.log("hoho");
-    console.log(moment().format());
+    // console.log("hoho");
+    // console.log(moment().format());
+    this.alertSer.error();
     // alert('jing pa');
   }
 
@@ -70,7 +97,7 @@ export class MainPageComponent implements OnInit {
       surname: "TEST " + name,
       sex: "W",
       address: "kk",
-      date: "2022-10-07"
+      date: "2022-10-07",
     };
     const depObj = {
       dpName: "dai-ter",
@@ -94,7 +121,7 @@ export class MainPageComponent implements OnInit {
 
   async sendItem(item) {
     // item.date = moment(item.date).format();
-    console.log(item);
+    // console.log(item);
     this.chge = Object.assign({}, item);
     this.mode = "edit";
     this.modalEdit = true;
@@ -109,13 +136,14 @@ export class MainPageComponent implements OnInit {
       surname: "",
       sex: "W",
       address: "KK",
-      date: ""
+      date: "",
     };
   }
 
   async onSave() {
     // console.log(this.chge);
     this.wrong = false;
+    // this.mode = "test";
 
     const obj = {
       hn: this.chge.hn,
@@ -123,13 +151,21 @@ export class MainPageComponent implements OnInit {
       surname: this.chge.surname,
       sex: this.chge.sex,
       address: this.chge.address,
-      date: this.chge.date
+      date: this.chge.date,
     };
+    if (this.mode === "test") {
+      // console.log(obj);
+    }
     if (this.mode === "edit") {
+      console.log(obj.date);
+      obj.date = moment(obj.date).format("YYYY-MM-DD");
+      console.log(obj.date);
+
       const result: any = await this.patientSer.updateP(obj);
       // console.log(result);
       if (result.rows) {
         this.modalEdit = false;
+        this.alertSer.savesuccess();
         this.getList();
       }
     }
@@ -141,7 +177,8 @@ export class MainPageComponent implements OnInit {
           this.wrong = true;
           // console.log("MERGE");
           this.modalEdit = false;
-          alert("หมายเลข HN นี้มีผู้ใช้งานแล้ว");
+          this.alertSer.error();
+          // alert("หมายเลข HN นี้มีผู้ใช้งานแล้ว");
         }
         // console.log(i+1 ,' มึงอยู่ไหนเนี่ย', this.wrong);
       }

@@ -6,6 +6,8 @@ import { ClarityModule } from '@clr/angular';
 import { MainRoutingModule } from './main-routing.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { TemplateComponent } from './template/template.component';
+// import { MyDatePickerTHModule } from 'mydatepicker-th';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -13,10 +15,12 @@ import { TemplateComponent } from './template/template.component';
     TemplateComponent,
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     FormsModule,
     ClarityModule,
-    MainRoutingModule
+    MainRoutingModule,
+    // MyDatePickerTHModule
   ]
 })
 export class MainModule { }

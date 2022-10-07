@@ -9,6 +9,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MainModule } from './modules/main/main.module';
 import { environment } from 'src/environments/environment';
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     BrowserAnimationsModule,
     MainModule,
+    AngularMyDatePickerModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

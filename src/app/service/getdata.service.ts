@@ -1,12 +1,11 @@
-
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class GetdataService {
-  constructor(private http: HttpClient, @Inject('API_URL') private apiUrl) {}
+  constructor(private http: HttpClient, @Inject("API_URL") private apiUrl) {}
 
   getAll() {
     return this.http
@@ -26,7 +25,7 @@ export class GetdataService {
 
   insertP(data) {
     return this.http
-      .post(`${this.apiUrl}/pt/insert-patient`,{data})
+      .post(`${this.apiUrl}/pt/insert-patient`, { data })
       .toPromise()
       .then((result) => result)
       .catch((err) => err);
@@ -34,7 +33,7 @@ export class GetdataService {
 
   updateP(data) {
     return this.http
-      .post(`${this.apiUrl}/pt/update-patient`,{data})
+      .post(`${this.apiUrl}/pt/update-patient`, { data })
       .toPromise()
       .then((result) => result)
       .catch((err) => err);
@@ -42,16 +41,15 @@ export class GetdataService {
 
   delP(data) {
     return this.http
-      .post(`${this.apiUrl}/pt/del-patient`,{data})
+      .post(`${this.apiUrl}/pt/del-patient`, { data })
       .toPromise()
       .then((result) => result)
       .catch((err) => err);
   }
 
-
   insertD(data) {
     return this.http
-      .post(`${this.apiUrl}/pt/insert-dep`,{data})
+      .post(`${this.apiUrl}/pt/insert-dep`, { data })
       .toPromise()
       .then((result) => result)
       .catch((err) => err);

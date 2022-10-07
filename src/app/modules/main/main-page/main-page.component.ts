@@ -15,12 +15,14 @@ export class MainPageComponent implements OnInit {
   hn: any;
   chge: any;
   modalEdit = false;
-  mode = 'add';
+  mode = "add";
+  wrong = false;
 
   constructor(private router: Router, private patientSer: GetdataService) {}
 
   ngOnInit() {
     this.getList();
+    moment.locale('th');
   }
 
   async getList() {
@@ -28,6 +30,14 @@ export class MainPageComponent implements OnInit {
       const result: any = await this.patientSer.getAll();
       // console.log(result);
       if (result.rows) {
+        for (let item of result.rows) {
+          // console.log(item.date);
+          if(item.date === null){
+            item.dateShow = "-";
+          } else {
+            item.dateShow = moment(item.date).add(543,'year').format('LL');
+          }
+        }
         this.pList = result.rows;
       }
     } catch (err) {
@@ -41,13 +51,12 @@ export class MainPageComponent implements OnInit {
     // alert('jing pa');
   }
 
-  async del(item){
-    console.log(item);
+  async del(item) {
+    // console.log(item);
     try {
       const result: any = await this.patientSer.delP(item);
-      console.log(result);
+      // console.log(result);
       this.getList();
-      
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +70,7 @@ export class MainPageComponent implements OnInit {
       surname: "TEST " + name,
       sex: "W",
       address: "kk",
+      date: "2022-10-07"
     };
     const depObj = {
       dpName: "dai-ter",
@@ -72,7 +82,7 @@ export class MainPageComponent implements OnInit {
     try {
       // const insertP: any = await this.patientSer.insertD(depObj);
       const insertP: any = await this.patientSer.insertP(obj);
-      console.log(insertP);
+      // console.log(insertP);
       if (insertP.rows) {
         this.router.navigate(["/"]);
         this.getList();
@@ -83,41 +93,65 @@ export class MainPageComponent implements OnInit {
   }
 
   async sendItem(item) {
+    // item.date = moment(item.date).format();
+    console.log(item);
     this.chge = Object.assign({}, item);
-    this.mode = 'edit';
+    this.mode = "edit";
     this.modalEdit = true;
   }
 
   async add() {
-    this.mode = 'add';
+    this.mode = "add";
     this.modalEdit = true;
     this.chge = {
-      hn: '',
-      firstname: '',
-      surname: '',
-      sex: 'W',
-      address: 'KK'
+      hn: "",
+      firstname: "",
+      surname: "",
+      sex: "W",
+      address: "KK",
+      date: ""
     };
   }
 
   async onSave() {
+    // console.log(this.chge);
+    this.wrong = false;
+
     const obj = {
       hn: this.chge.hn,
       firstname: this.chge.firstname,
       surname: this.chge.surname,
       sex: this.chge.sex,
-      address: this.chge.address
+      address: this.chge.address,
+      date: this.chge.date
     };
-    try {
-      if(this.mode === 'edit'){
-        const result: any = await this.patientSer.updateP(obj);
-        // console.log(result);
-        if (result.rows) {
-          this.modalEdit = false;
-          this.getList();
-        }
+    if (this.mode === "edit") {
+      const result: any = await this.patientSer.updateP(obj);
+      // console.log(result);
+      if (result.rows) {
+        this.modalEdit = false;
+        this.getList();
       }
-      if(this.mode === 'add'){
+    }
+    if (this.mode === "add") {
+      // await this.getList();
+      for (let i = 0; i < this.pList.length; i++) {
+        // console.log(i, this.pList[i].hn, obj.hn, this.wrong);
+        if (this.pList[i].hn === obj.hn) {
+          this.wrong = true;
+          // console.log("MERGE");
+          this.modalEdit = false;
+          alert("หมายเลข HN นี้มีผู้ใช้งานแล้ว");
+        }
+        // console.log(i+1 ,' มึงอยู่ไหนเนี่ย', this.wrong);
+      }
+      // console.log('ตายไปแล้วเหรอลูก');
+
+      if (this.wrong === true) {
+        // console.log('tong');
+      } else {
+        // console.log('mai tong');
+
         const result: any = await this.patientSer.insertP(obj);
         console.log(result);
         if (result.rows) {
@@ -125,8 +159,6 @@ export class MainPageComponent implements OnInit {
           this.getList();
         }
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 }

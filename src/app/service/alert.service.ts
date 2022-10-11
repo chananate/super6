@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 export class AlertService {
   constructor() {}
 
-  error() {
+  error(text = 'เกิดข้อผิดพลาด', title = 'เกิดข้อผิดพลาด') {
     return Swal.fire({
       icon: 'error',
       title: 'Oops...',

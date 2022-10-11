@@ -1,0 +1,148 @@
+<h1>PATIENT</h1>
+
+<form clrForm>
+  {{ maxDate }}
+  <clr-date-container>
+    <label>ลองจ้า </label>
+    <input
+      type="date"
+      clrDate
+      name="today"
+      [(ngModel)]="today"
+      [max]="maxDate"
+      [value]="today"
+    />
+  </clr-date-container>
+  <input type="time" clrTime name="time" [(ngModel)]="time" />
+  <button class="btn btn-sm" (click)="testDate(today, time)">ลองจ้า</button>
+  <!-- {{ timeShow }} -->
+</form>
+
+<button class="btn btn-sm" (click)="add()">ADD</button>
+<div class="clr-col">
+  <clr-datagrid *ngIf="pList">
+    <clr-dg-column></clr-dg-column>
+    <clr-dg-column [clrDgField]="'hn'">hn</clr-dg-column>
+    <clr-dg-column [clrDgField]="'firstname' || 'surname'"
+      >ชื่อ-นามสกุล</clr-dg-column
+    >
+    <clr-dg-column>เพศ</clr-dg-column>
+    <clr-dg-column>วันที่ลงทะเบียน</clr-dg-column>
+    <clr-dg-column>#</clr-dg-column>
+    <clr-dg-row *clrDgItems="let item of pList; let i = index">
+      <clr-dg-cell>{{ i + 1 }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.hn }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.firstname }} {{ item.surname }}</clr-dg-cell>
+      <clr-dg-cell *ngIf="item.sex == 'W'">หญิง</clr-dg-cell>
+      <clr-dg-cell *ngIf="item.sex == 'M'">ชาย</clr-dg-cell>
+      <clr-dg-cell>{{ item.dateShow }}</clr-dg-cell>
+      <clr-dg-cell>
+        <button class="btn btn-outline" (click)="sendItem(item)">EDIT</button>
+        <button class="btn btn-danger-outline" (click)="del(item.hn)">
+          DELETE
+        </button>
+      </clr-dg-cell>
+    </clr-dg-row>
+  </clr-datagrid>
+  <!-- <h1>insert</h1>
+  ชื่อ: <input type="text" [(ngModel)]="name" value="name" /><br />
+  hn: <input type="number" [(ngModel)]="hn" value="hn" min="1" />
+  <button (click)="onClick(name, hn)" [disabled]="!name || !hn">เพิ่ม</button>
+  <div *ngIf="hn <= 0">CHECK HN!</div> -->
+
+  <clr-modal *ngIf="chge" [(clrModalOpen)]="modalEdit">
+    <h3 class="modal-title" *ngIf="mode == 'edit'">แก้ไข</h3>
+    <h3 class="modal-title" *ngIf="mode == 'add'">เพิ่ม</h3>
+    <div class="modal-body">
+      <label><b>HN</b></label>
+      <clr-input-container class="clr-col-8">
+        <input
+          clrInput
+          type="number"
+          [(ngModel)]="chge.hn"
+          name="hn"
+          [disabled]="mode == 'edit'"
+        /> </clr-input-container
+      ><br />
+      <label><b>ชื่อ</b></label>
+      <clr-input-container class="clr-col-8">
+        <input
+          clrInput
+          type="text"
+          [(ngModel)]="chge.firstname"
+          name="firstname"
+        /> </clr-input-container
+      ><br />
+      <label><b>นามสกุล</b></label>
+      <clr-input-container class="clr-col-8">
+        <input
+          clrInput
+          type="text"
+          [(ngModel)]="chge.surname"
+          name="surname"
+        /> </clr-input-container
+      ><br />
+      <clr-radio-container clrInline>
+        <label>กรุณาเลือก</label>
+        <clr-radio-wrapper>
+          <input
+            type="radio"
+            clrRadio
+            name="sex"
+            required
+            value="W"
+            [(ngModel)]="chge.sex"
+          />
+          <label>หญิง</label>
+        </clr-radio-wrapper>
+        <clr-radio-wrapper>
+          <input
+            type="radio"
+            clrRadio
+            name="sex"
+            required
+            value="M"
+            [(ngModel)]="chge.sex"
+          />
+          <label>ชาย</label>
+        </clr-radio-wrapper> </clr-radio-container
+      ><br />
+      <clr-date-container>
+        <label>วันที่</label>
+        <input
+          type="date"
+          clrDate
+          name="chge.date"
+          [(ngModel)]="chge.date"
+          [value]="chge.date"
+        />
+      </clr-date-container>
+      <!-- <input type="date" name="date" value="chge.date" [(ngModel)]="chge.date" /> -->
+      <!-- <div class="clr-row">
+      <div class="clr-col-6">
+        วันที่
+        <my-date-picker-th
+          name="date"
+          [options]="myDatePickerOptions"
+          [(ngModel)]="chge.date"
+          required
+        ></my-date-picker-th>
+      </div>
+    </div> -->
+    </div>
+    <br />
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="modalEdit = false">
+        ยกเลิก
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onSave()"
+        [disabled]="!chge.firstname || !chge.surname || !chge.sex"
+      >
+        บันทึก
+      </button>
+    </div>
+  </clr-modal>
+</div>

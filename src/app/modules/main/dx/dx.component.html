@@ -1,0 +1,59 @@
+<h1>DIAGNOSIS</h1>
+<br>
+<button class="btn btn-sm" (click)="add()">ADD</button>
+<div class="clr-col">
+  <clr-datagrid *ngIf="dxList">
+    <clr-dg-column>code</clr-dg-column>
+    <clr-dg-column >ตำแหน่ง</clr-dg-column>
+    <clr-dg-column>#</clr-dg-column>
+    <clr-dg-row *clrDgItems="let item of dxList;">
+      <clr-dg-cell>{{ item.dCode }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.dName }}</clr-dg-cell>
+      <clr-dg-cell>
+        <button class="btn btn-outline" (click)="sendItem(item)">EDIT</button>
+        <button class="btn btn-danger-outline" (click)="del(item.dCode)">
+          DELETE
+        </button>
+      </clr-dg-cell>
+    </clr-dg-row>
+  </clr-datagrid>
+</div>
+<clr-modal *ngIf="dxChange" [(clrModalOpen)]="modalEdit">
+    <h3 class="modal-title" *ngIf="mode == 'edit'">แก้ไข</h3>
+    <h3 class="modal-title" *ngIf="mode == 'add'">เพิ่ม</h3>
+    <div class="modal-body">
+      <label><b>code</b></label>
+      <clr-input-container class="clr-col-8">
+        <input
+          clrInput
+          type="text"
+          [(ngModel)]="dxChange.dCode"
+          name="dCode"
+        /> </clr-input-container
+      ><br />
+      <label><b>ชื่อโรค</b></label>
+      <clr-input-container class="clr-col-8">
+        <input
+          clrInput
+          type="text"
+          [(ngModel)]="dxChange.dName"
+          name="dName"
+        /> </clr-input-container
+      ><br />
+    </div>
+    <br />
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="modalEdit = false">
+        ยกเลิก
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onSave()"
+        [disabled]="!dxChange.dCode || !dxChange.dName"
+      >
+        บันทึก
+      </button>
+    </div>
+    </clr-modal>
+    

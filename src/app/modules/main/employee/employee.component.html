@@ -1,0 +1,70 @@
+
+<h1>EMPLOYEE</h1>
+<br>
+<button class="btn btn-sm" (click)="add()">ADD</button>
+<div class="clr-col">
+  <clr-datagrid *ngIf="eList">
+    <clr-dg-column></clr-dg-column>
+    <clr-dg-column [clrDgField]="'firstname' || 'surname'">ชื่อ-นามสกุล</clr-dg-column>
+    <clr-dg-column >ตำแหน่ง</clr-dg-column>
+    <clr-dg-column>#</clr-dg-column>
+    <clr-dg-row *clrDgItems="let item of eList;">
+      <clr-dg-cell>{{ item.empId }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.firstname }} {{ item.surname }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.pName }}</clr-dg-cell>
+      <clr-dg-cell>
+        <button class="btn btn-outline" (click)="sendItem(item)">EDIT</button>
+        <button class="btn btn-danger-outline" (click)="del(item.empId)">
+          DELETE
+        </button>
+      </clr-dg-cell>
+    </clr-dg-row>
+  </clr-datagrid>
+</div>
+<clr-modal *ngIf="eChange" [(clrModalOpen)]="modalEdit">
+<h3 class="modal-title" *ngIf="mode == 'edit'">แก้ไข</h3>
+<h3 class="modal-title" *ngIf="mode == 'add'">เพิ่ม</h3>
+<div class="modal-body">
+  <label><b>ชื่อ</b></label>
+  <clr-input-container class="clr-col-8">
+    <input
+      clrInput
+      type="text"
+      [(ngModel)]="eChange.firstname"
+      name="firstname"
+    /> </clr-input-container
+  ><br />
+  <label><b>นามสกุล</b></label>
+  <clr-input-container class="clr-col-8">
+    <input
+      clrInput
+      type="text"
+      [(ngModel)]="eChange.surname"
+      name="surname"
+    /> </clr-input-container
+  ><br />
+  <label><b>ตำแหน่ง</b></label><br>
+        <div class="clr-select-wrapper">
+            <select id="position_pId" [(ngModel)]="eChange.position_pId" class="clr-select" name="position_pId">
+                <option *ngFor="let p of po" [value]="p.pId">
+                    {{ p.pName }}
+                </option>
+            </select>
+        </div>
+  <br />
+</div>
+<br />
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline" (click)="modalEdit = false">
+    ยกเลิก
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="onSave()"
+    [disabled]="!eChange.firstname || !eChange.surname || !eChange.position_pId"
+  >
+    บันทึก
+  </button>
+</div>
+</clr-modal>

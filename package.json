@@ -29,6 +29,8 @@
     "fix": "0.0.6",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "mydatepicker": "^2.6.11",
+    "mydatepicker-th": "^0.1.1",
     "numeral": "^2.0.6",
     "rxjs": "^6.5.5",
     "sweetalert2": "^9.17.2",

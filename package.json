@@ -22,7 +22,7 @@
     "@auth0/angular-jwt": "^4.2.0",
     "@clr/angular": "^3.1.4",
     "@clr/core": "^3.1.4",
-    "@clr/icons": "^3.1.4",
+    "@clr/icons": "^3.1.15",
     "@clr/ui": "^3.1.4",
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "angular-mydatepicker": "^0.11.5",

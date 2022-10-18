@@ -42,7 +42,7 @@ public get currentUserValue(): Users {
                 sessionStorage.setItem(token, users.token);
                 this.currentUserSubject.next(users);
             } else {
-                this.alertService.error('username หรือ password ไม่ถูกต้อง');
+                this.alertService.error2('username หรือ password ไม่ถูกต้อง');
                 this.router.navigate(['/login']);
             }
             return users;

@@ -14,6 +14,8 @@ import { DxComponent } from './dx/dx.component';
 import { MyDatePicker } from 'mydatepicker';
 import { DepComponent } from './dep/dep.component';
 import { OpdSComponent } from './opd-s/opd-s.component';
+import { MainComponent } from './main.component';
+import { TestFormComponent } from './test-form/test-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { OpdSComponent } from './opd-s/opd-s.component';
     EmployeeComponent,
     DxComponent,
     DepComponent,
-    OpdSComponent
+    OpdSComponent,
+    MainComponent,
+    TestFormComponent
   ],
   imports: [
     BrowserModule,

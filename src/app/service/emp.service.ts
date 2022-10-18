@@ -47,4 +47,12 @@ export class EmpService {
       .then((result) => result)
       .catch((err) => err);
   }
+
+  search_byId(data) {
+    return this.http
+      .post(`${this.apiUrl}/em/search-by-id`, { data })
+      .toPromise()
+      .then((result) => result)
+      .catch((err) => err);
+  }
 }

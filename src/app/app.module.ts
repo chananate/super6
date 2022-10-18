@@ -11,7 +11,7 @@ import { MainModule } from './modules/main/main.module';
 import { environment } from 'src/environments/environment';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 // import { MyDatePickerTHModule } from 'mydatepicker-th';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyDatePicker } from 'mydatepicker';
 import { LoginComponent } from './modules/login/login.component';
 // import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
@@ -32,6 +32,7 @@ import { LoginComponent } from './modules/login/login.component';
     MainModule,
     AngularMyDatePickerModule,
     BrowserModule,
+    ReactiveFormsModule
 
     // MyDatePicker
     // NgxMatDatetimePickerModule
@@ -43,7 +44,7 @@ import { LoginComponent } from './modules/login/login.component';
     { provide: 'APPNAME', useValue: environment.appName },
     { provide: 'VERSION', useValue: environment.version },
     { provide: 'SUBVERSION', useValue: environment.subVersion },
-    {provide: LOCALE_ID, useValue: 'th'},
+    {provide: LOCALE_ID, useValue: 'th-TH'},
     DatePipe
   ],
   bootstrap: [AppComponent]

@@ -2,7 +2,7 @@ import { PatientComponent } from './patient/patient.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 
 import { MainRoutingModule } from './main-routing.module';
@@ -33,6 +33,7 @@ import { TestFormComponent } from './test-form/test-form.component';
     FormsModule,
     ClarityModule,
     MainRoutingModule,
+    ReactiveFormsModule
     // MyDatePicker
     // MyDatePickerTHModule
   ]

@@ -6,13 +6,22 @@ import Swal from "sweetalert2";
 export class AlertService {
   constructor() {}
 
-  error(text = 'เกิดข้อผิดพลาด', title = 'เกิดข้อผิดพลาด') {
+  errorPT(text = 'เกิดข้อผิดพลาด', title = 'เกิดข้อผิดพลาด') {
     return Swal.fire({
       icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
-      footer: '<a href="">Why do I have this issue?</a>'
-    })
+      title: title,
+      text: text,
+      footer: '<a href="#/main/patient">ต้องการลงทะเบียนผู้ป่วย ?</a>'
+    });
+  }
+
+  error2(text = 'เกิดข้อผิดพลาด', title = 'เกิดข้อผิดพลาด') {
+    return Swal.fire({
+      icon: 'error',
+      title: title,
+      text: text,
+      confirmButtonText: 'ปิด'
+    });
   }
 
   savesuccess() {

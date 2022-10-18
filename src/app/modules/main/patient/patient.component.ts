@@ -18,7 +18,8 @@ registerLocaleData(localeTh);
 })
 export class PatientComponent implements OnInit {
   public optest:IMyOptions={
-    markCurrentDay:true
+    markCurrentDay:true,
+    disableWeekends: true
   }
 
   demoCollapsible = true;
@@ -83,13 +84,13 @@ export class PatientComponent implements OnInit {
   }
 
   testDate(item1,item2){
-    console.log(item1,item2);
+    // console.log(item1,item2);
   }
 
   deb() {
     // console.log("hoho");
     // console.log(moment().format());
-    this.alertSer.error();
+    this.alertSer.error2();
     // alert('jing pa');
   }
 
@@ -193,7 +194,7 @@ export class PatientComponent implements OnInit {
           this.wrong = true;
           // console.log("MERGE");
           this.modalEdit = false;
-          this.alertSer.error();
+          this.alertSer.error2();
           // alert("หมายเลข HN นี้มีผู้ใช้งานแล้ว");
         }
         // console.log(i+1 ,' มึงอยู่ไหนเนี่ย', this.wrong);

@@ -54,4 +54,20 @@ export class GetdataService {
       .then((result) => result)
       .catch((err) => err);
   }
+
+  search_byHn(data) {
+    return this.http
+      .post(`${this.apiUrl}/pt/search-pt-hn`, { data })
+      .toPromise()
+      .then((result) => result)
+      .catch((err) => err);
+  }
+
+  search_byName(data) {
+    return this.http
+      .post(`${this.apiUrl}/pt/search-pt-name`, { data })
+      .toPromise()
+      .then((result) => result)
+      .catch((err) => err);
+  }
 }

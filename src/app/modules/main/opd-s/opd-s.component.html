@@ -1,12 +1,47 @@
 <h1>OPD</h1>
-<br>
-<form clrForm>
-    <clr-input-container>
-      <label>HN</label>
-      <input clrInput type="text" [(ngModel)]="hn" name="hn" />
-    </clr-input-container>
-    <clr-input-container>
+<br />
+<div class="clr-col-">
+  <form clrForm>
+    <div class="clr-form-control">
+      <label for="select-full" class="clr-control-label">ค้นหาด้วย</label>
+      <div class="clr-control-container">
+        <div class="clr-select-wrapper">
+          <select id="select-full" name="select" [(ngModel)]="select" class="clr-select">
+            <option value="byHN">HN</option>
+            <option value="byName">ชื่อ</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="select==='byHN'">
+      <input clrInput type="text" placeholder="กรอกเลข HN" [(ngModel)]="hn" name="hn" (focusout)="checkHN(hn)"/>
+      <p *ngIf="check===1">
+      <!-- <button class="btn btn-sm btn-success-outline" (click)="checkHN(hn)" [disabled]="!hn">
+        check hn
+      </button> -->
+        ชื่อ: {{ pt.firstname }} {{ pt.surname }} อายุ: {{ pt.age }}
+      </p>
+    </div>
+    <div *ngIf="select==='byName'">
+      <input clrInput type="text" placeholder="กรอกชื่อ" [(ngModel)]="firstname" name="firstname" />
+      <input clrInput type="text" placeholder="กรอกนามสกุล" [(ngModel)]="surname" name="surname" />
+      <p *ngIf="firstname && surname">
+      <button class="btn btn-sm btn-success-outline" (click)="checkName(firstname, surname)" [disabled]="!firstname && !surname">
+        check name
+      </button>
+        ชื่อ: {{ pt.firstname }} {{ pt.surname }} อายุ: {{ pt.age }}
+      </p>
+    </div>
+    <clr-textarea-container>
       <label>อาการเบื้องต้น</label>
-      <input clrInput type="text" [(ngModel)]="smypton" name="smypton" />
+      <textarea clrTextarea [(ngModel)]="smypton" name="smypton"></textarea>
+    </clr-textarea-container>
+    <clr-input-container>
+      <label>พยาบาล</label>
+    <input clrInput type="text" [(ngModel)]="empId" name="empId" placeholder="รหัสพนักงาน" (keyup)="checkEmp(empId)"/>
     </clr-input-container>
+    ชื่อ: {{ emp.firstname }} {{ emp.surname }}
+    <br>
+    <button class="btn" type="submit" (click)="submit()">บันทึก</button>
   </form>
+</div>

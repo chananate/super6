@@ -1,3 +1,4 @@
+import { TestFormComponent } from './test-form/test-form.component';
 import { OpdSComponent } from './opd-s/opd-s.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'dx', component: DxComponent },
       { path: 'dep', component: DepComponent },
       { path: 'opdS', component: OpdSComponent },
+      { path: 'test', component: TestFormComponent },
     ]
   }
 ];

@@ -1,21 +1,30 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+DX
+<div *ngFor="let item of dxList">
+{{item.dCode}} : {{item.dName}}
+</div>
+------------- <br>
+<form [formGroup]="formDiag" (ngSubmit)="onSubmit()">
     <div>
       <label>
-        Name:
-        <input formControlName="name" placeholder="Your name">
+        CODE
+        <input formControlName="dCode" >
       </label>
     </div>
     <div>
       <label>
-        Email:
-        <input formControlName="email" placeholder="Your email">
+        NAME
+        <input formControlName="dName" >
       </label>
     </div>
-    <div>
-      <label>
-        Message:
-        <input formControlName="message" placeholder="Your message">
-      </label>
-    </div>
-    <button type="submit">Send</button>
+    <!-- <div formArrayName="aliases">
+      <button type="button" (click)="addAlias()">+ Add another alias</button>
+    
+      <div *ngFor="let alias of aliases.controls; let i=index">
+        <label for="alias-{{ i }}">Alias: alias-{{ i }}</label>
+        <input id="alias-{{ i }}" type="text" [formControlName]="i">
+      </div>
+    </div> -->
+    <button type="submit" [disabled]="formDiag.status==='INVALID'">Send</button>
   </form>
+{{formDiag.value | json}}
+{{formDiag.status}}

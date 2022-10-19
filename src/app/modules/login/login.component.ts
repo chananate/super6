@@ -20,15 +20,15 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    // private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
-    // this.loginForm = this.formBuilder.group({
-    //   username: ['', Validators.required],
-    //   password: ['', Validators.required]
-    // });
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
   get fval() {
     return this.loginForm.controls;
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = true;
-    console.log(this.fval);
+    // console.log(this.fval.username.value, this.fval.password.value);
 
     const row: any = (
       await this.authenticationService.login(
@@ -53,12 +53,9 @@ export class LoginComponent implements OnInit {
         this.fval.password.value
       )
     ).subscribe((data) => {
-      this.router.navigate(["/"]);
+      this.router.navigate(["/main/main"]);
     });
     console.log(row);
   }
 
-  test(a, b) {
-    console.log(a, b);
-  }
 }

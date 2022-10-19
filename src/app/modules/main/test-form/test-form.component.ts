@@ -6,6 +6,9 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AlertService } from "src/app/service/alert.service";
+import { DxService } from "src/app/service/dx.service";
 
 @Component({
   selector: "app-test-form",
@@ -13,20 +16,53 @@ import {
   styleUrls: ["./test-form.component.scss"],
 })
 export class TestFormComponent implements OnInit {
-  myForm: FormGroup;
+  dxList: any[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private dxService: DxService,
+    private alertService: AlertService,
+    private router: Router
+  ) { }
+
+  formDiag = this.fb.group({
+    dCode: this.fb.control(''),
+    dName: this.fb.control('')
+  });
 
   ngOnInit() {
-    this.myForm = new FormGroup({
-      name: new FormControl('Sammy'),
-      email: new FormControl(''),
-      message: new FormControl('hello')
-    });
+    this.getDx();
   }
 
-  onSubmit(form: FormGroup) {
-    console.log('Valid?', form.valid); // true or false
-    console.log('Name', form.value.name);
-    console.log('Email', form.value.email);
-    console.log('Message', form.value.message);
+  async getDx() {
+    try {
+      const result: any = await this.dxService.get();
+      if (result.rows) {
+        this.dxList = result.rows;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  async onSubmit() {
+    try {
+      const result: any = await this.dxService.insert(this.formDiag.value);
+      if (result.rows) {
+        this.alertService.savesuccess();
+        this.getDx();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // get aliases() {
+  //   return this.formDiag.get('aliases') as FormArray;
+  // }
+
+  // addAlias() {
+  //   this.aliases.push(this.fb.control(''));
+  // }
+
 }

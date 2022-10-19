@@ -13,10 +13,10 @@
           <clr-icon shape="caret down"></clr-icon>
         </button>
 
-        <!-- <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-            <a href="javascript://" clrDropdownItem routerLink="./about">ข้อมูลส่วนตัว</a>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+            <!-- <a href="javascript://" clrDropdownItem routerLink="./about">ข้อมูลส่วนตัว</a> -->
             <a href="javascript://" clrDropdownItem (click)="onLogout()">ออกจากระบบ</a>
-          </clr-dropdown-menu> -->
+          </clr-dropdown-menu>
       </clr-dropdown>
     </div>
   </header>
@@ -48,6 +48,10 @@
       <a clrVerticalNavLink routerLink="./dep" routerLinkActive="active">
         <clr-icon shape="factory" clrVerticalNavIcon></clr-icon>
         dep
+      </a>
+      <a clrVerticalNavLink routerLink="./test" routerLinkActive="active">
+        <clr-icon shape="heart" clrVerticalNavIcon></clr-icon>
+        test
       </a>
     </clr-vertical-nav>
     <!-- <nav class="sidenav">

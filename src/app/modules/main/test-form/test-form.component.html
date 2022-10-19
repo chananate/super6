@@ -1,22 +1,23 @@
-DX
-<div *ngFor="let item of dxList">
-{{item.dCode}} : {{item.dName}}
-</div>
-------------- <br>
-<form [formGroup]="formDiag" (ngSubmit)="onSubmit()">
-    <div>
-      <label>
-        CODE
-        <input formControlName="dCode" >
-      </label>
-    </div>
-    <div>
-      <label>
-        NAME
-        <input formControlName="dName" >
-      </label>
-    </div>
-    <!-- <div formArrayName="aliases">
+<h3>DX</h3>
+<br>
+<!-- <button (click)="getRandomColor()">Generate random color</button> -->
+<label *ngFor="let item of dxList; let i=index" >
+    <span [ngStyle]="{color:item.rdc}" class="label"><b>{{item.dCode}}</b> : {{item.dName}}</span>
+</label>
+<form clrForm [formGroup]="formDiag" (ngSubmit)="onSubmit()">
+  <clr-input-container>
+    <label>
+      CODE
+    </label>
+      <input formControlName="dCode" clrInput>
+  </clr-input-container>
+  <clr-input-container>
+    <label>
+      NAME
+    </label>
+      <input formControlName="dName" clrInput>
+  </clr-input-container>
+  <!-- <div formArrayName="aliases">
       <button type="button" (click)="addAlias()">+ Add another alias</button>
     
       <div *ngFor="let alias of aliases.controls; let i=index">
@@ -24,7 +25,7 @@ DX
         <input id="alias-{{ i }}" type="text" [formControlName]="i">
       </div>
     </div> -->
-    <button type="submit" [disabled]="formDiag.status==='INVALID'">Send</button>
-  </form>
-{{formDiag.value | json}}
-{{formDiag.status}}
+  <button type="submit" class="btn btn-sm btn-primary-outline" [disabled]="formDiag.status==='INVALID'">Send</button>
+</form>
+value: {{formDiag.value | json}}<br>
+status: {{formDiag.status}}

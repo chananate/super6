@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
         this.fval.username.value,
         this.fval.password.value
       )
-    ).subscribe((data) => {
+    )
+    .subscribe((data) => {
       this.router.navigate(["/main/main"]);
     });
     console.log(row);

@@ -42,7 +42,7 @@ public get currentUserValue(): Users {
                 this.currentUserSubject.next(users);
             } else {
                 this.alertService.error2('username หรือ password ไม่ถูกต้อง');
-                this.router.navigate(['/']);
+                this.router.navigate(['#/']);
             }
             return users;
         }));

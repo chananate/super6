@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class MainService {
   token = sessionStorage.getItem('token');
-  tokenName = 'tokenLMS';
+  tokenName = 'token_test';
   jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(

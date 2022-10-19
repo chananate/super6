@@ -17,7 +17,8 @@ import { DxService } from "src/app/service/dx.service";
 })
 export class TestFormComponent implements OnInit {
   dxList: any[] = [];
-
+  color: any = '#';
+  letters: any = '0123456789ABCDE';
   constructor(
     private fb: FormBuilder,
     private dxService: DxService,
@@ -38,7 +39,14 @@ export class TestFormComponent implements OnInit {
     try {
       const result: any = await this.dxService.get();
       if (result.rows) {
-        this.dxList = result.rows;
+        this.dxList = await result.rows;
+        for(let item of this.dxList){
+          this.color = '#';
+          for (var i = 0; i < 6; i++) {
+            this.color += this.letters[Math.floor(Math.random() * 16)];
+          }
+          item.rdc = this.color;
+        }
       }
     } catch (error) {
       console.log(error);
@@ -50,12 +58,22 @@ export class TestFormComponent implements OnInit {
       const result: any = await this.dxService.insert(this.formDiag.value);
       if (result.rows) {
         this.alertService.savesuccess();
+        // this.router.navigate(["/main/test"]);
         this.getDx();
+        this.formDiag.reset();
       }
     } catch (error) {
       console.log(error);
     }
   }
+
+  getRandomColor() {
+    this.color = '#';
+    for (var i = 0; i < 6; i++) {
+        this.color += this.letters[Math.floor(Math.random() * 16)];
+    }
+    console.log(this.color);
+}
 
   // get aliases() {
   //   return this.formDiag.get('aliases') as FormArray;

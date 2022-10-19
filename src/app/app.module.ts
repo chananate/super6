@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 // import { MyDatePickerTHModule } from 'mydatepicker-th';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { MyDatePicker } from 'mydatepicker';
+import { MyDatePicker } from 'mydatepicker';
 import { LoginComponent } from './modules/login/login.component';
 // import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 

@@ -60,6 +60,7 @@ export class PatientComponent implements OnInit {
       if (result.rows) {
         for (let item of result.rows) {
           // console.log(item.date);
+          item.age = moment(item.date).fromNow(true);
           if (item.date === null) {
             item.dateShow = "-";
           } else {
@@ -188,6 +189,7 @@ export class PatientComponent implements OnInit {
     }
     if (this.mode === "add") {
       // await this.getList();
+      obj.date = moment(obj.date,'DD/MM/YYYY').format("YYYY-MM-DD");
       for (let i = 0; i < this.pList.length; i++) {
         // console.log(i, this.pList[i].hn, obj.hn, this.wrong);
         if (this.pList[i].hn === obj.hn) {

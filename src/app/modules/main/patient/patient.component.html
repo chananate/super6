@@ -35,7 +35,7 @@
       <clr-dg-cell>{{ item.firstname }} {{ item.surname }}</clr-dg-cell>
       <clr-dg-cell *ngIf="item.sex == 'W'">หญิง</clr-dg-cell>
       <clr-dg-cell *ngIf="item.sex == 'M'">ชาย</clr-dg-cell>
-      <clr-dg-cell>{{ item.dateShow }}</clr-dg-cell>
+      <clr-dg-cell>{{ item.dateShow }} ({{item.age}})</clr-dg-cell>
       <clr-dg-cell>
         <button class="btn btn-outline" (click)="sendItem(item)">EDIT</button>
         <button class="btn btn-danger-outline" (click)="del(item.hn)">

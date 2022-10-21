@@ -11,6 +11,7 @@ import { LayoutComponent } from './layout/layout.component';
 
 import { MainPageComponent } from './main-page/main-page.component';
 import { PatientComponent } from './patient/patient.component';
+import { BreferComponent } from './brefer/brefer.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'dep', component: DepComponent },
       { path: 'opdS', component: OpdSComponent },
       { path: 'test', component: TestFormComponent },
+      { path: 'brefer', component: BreferComponent },
     ]
   }
 ];

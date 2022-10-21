@@ -15,6 +15,7 @@ import { MyDatePicker } from 'mydatepicker';
 import { DepComponent } from './dep/dep.component';
 import { OpdSComponent } from './opd-s/opd-s.component';
 import { TestFormComponent } from './test-form/test-form.component';
+import { BreferComponent } from './brefer/brefer.component';
 
 @NgModule({
   declarations: [
@@ -25,15 +26,16 @@ import { TestFormComponent } from './test-form/test-form.component';
     DxComponent,
     DepComponent,
     OpdSComponent,
-    TestFormComponent
+    TestFormComponent,
+    BreferComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ClarityModule,
     MainRoutingModule,
-    ReactiveFormsModule
     // MyDatePicker
     // MyDatePickerTHModule
   ]

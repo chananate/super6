@@ -21,53 +21,64 @@ export class OpdSComponent implements OnInit {
   pt: any = {};
   select: any = "byHN";
   check = 0;
+  alert: any = '';
 
   constructor(
     private router: Router,
     private empSer: EmpService,
     private ptSer: GetdataService,
     private alertSer: AlertService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     moment.locale("th");
   }
 
   async checkHN(item) {
-    try {
-      item = parseInt(item);
-      const result: any = await this.ptSer.search_byHn(item);
-      // console.log(result);
-      if (result.rows[0]) {
-        result.rows[0].age = moment(result.rows[0].date).fromNow(true);
-        this.pt = result.rows[0];
-        this.check = 1;
-      } else {
-        this.check = 2;
-        // this.alertSer.errorPT();
-        // this.router.navigate(['main/patient']);
+    if (item) {
+      try {
+        item = parseInt(item);
+        const result: any = await this.ptSer.search_byHn(item);
+        // console.log(result);
+        if (result.rows[0]) {
+          result.rows[0].age = moment(result.rows[0].date).fromNow(true);
+          this.pt = result.rows[0];
+          this.check = 1;
+        } else {
+          this.check = 2;
+          // this.alertSer.errorPT();
+          // this.router.navigate(['main/patient']);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      this.pt = {};
+      this.check = 0;
     }
   }
 
   async checkName(firstname, surname) {
-    const obj = { firstname: firstname, surname: surname };
-    try {
-      const result: any = await this.ptSer.search_byName(obj);
-      console.log(result);
-      if (result.rows[0]) {
-        result.rows[0].age = moment(result.rows[0].date).fromNow(true);
-        this.pt = result.rows[0];
-        this.check = 1;
-      } else {
-        this.check = 2;
-        // this.alertSer.errorPT();
-        // this.router.navigate(['main/patient']);
+    if (firstname && surname) {
+      const obj = { firstname: firstname, surname: surname };
+      try {
+        const result: any = await this.ptSer.search_byName(obj);
+        console.log(result);
+        if (result.rows[0]) {
+          result.rows[0].age = moment(result.rows[0].date).fromNow(true);
+          this.pt = result.rows[0];
+          this.check = 1;
+        } else {
+          this.check = 2;
+          // this.alertSer.errorPT();
+          // this.router.navigate(['main/patient']);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      this.pt = {};
+      this.check = 0;
     }
   }
 
@@ -100,6 +111,8 @@ export class OpdSComponent implements OnInit {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      this.emp = {};
     }
   }
 }

@@ -38,7 +38,7 @@
     </clr-textarea-container>
     <clr-input-container>
       <label>พยาบาล</label>
-    <input clrInput type="text" [(ngModel)]="empId" name="empId" placeholder="รหัสพนักงาน" (keyup)="checkEmp(empId)"/>
+    <input clrInput type="text" [(ngModel)]="empId" name="empId" placeholder="รหัสพนักงาน" (focusout)="checkEmp(empId)"/>
     </clr-input-container>
     ชื่อ: {{ emp.firstname }} {{ emp.surname }}
     <br>

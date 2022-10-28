@@ -1,41 +1,67 @@
-<h1>
-    <clr-icon size="30" shape="caravan"></clr-icon>
-    refer back
-</h1>
-<br>
-<table class="table table-noborder">
-    <thead>
-        <tr>
-            <th class="left">Monster</th>
-            <th>Home</th>
-            <th>Likes Cookies</th>
-            <th class="left">Fun to Play With</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="left">Wolfman</td>
-            <td>Nondisclosed countryside</td>
-            <td>Sometimes</td>
-            <td class="left">Not really</td>
-        </tr>
-        <tr>
-            <td class="left">Mothra</td>
-            <td>Tropical island</td>
-            <td>No</td>
-            <td class="left">Only if you have a flashlight</td>
-        </tr>
-        <tr>
-            <td class="left">Oscar the Grouch</td>
-            <td>Sesame Street</td>
-            <td>No</td>
-            <td class="left">No</td>
-        </tr>
-        <tr>
-            <td class="left">Cookie Monster</td>
-            <td>Sesame Street</td>
-            <td>Definitely yes</td>
-            <td class="left">Only if you have no cookies</td>
-        </tr>
-    </tbody>
-</table>
+<h1>REFER BACK</h1>
+<div class="clr-row">
+    <div class="clr-col-4" *ngIf="nrefer">
+        <hr>
+        <b> หมายเลข refer : </b>{{nrefer.nrefer_no}}<br>
+        <b> hn : </b>{{nrefer.hn}}<br>
+        <b> หมายเลขบัตรประชาชน : </b>{{nrefer.cid}}<br>
+        <b> ชื่อ-สกุล : </b>{{pt.firstname}} {{pt.surname}}<br>
+        <b> อายุ : </b>{{pt.age}}<br>
+        <b> VN : </b>{{nrefer.vn}}<br>
+        <b> เลขสถานพยาบาล : </b>{{nrefer.hos_no}}<br>
+        <b> ระดับความฉุกเฉิน : </b>{{nrefer.emc_no}}<br>
+        <b> รักษา : </b>{{nrefer.cure}}<br>
+        <b> วันที่ refer : </b>{{nrefer.date}}<br>
+        <b> วันที่ refer หมดอายุ : </b>{{nrefer.date_exp}}<br>
+    </div>
+    <div class="clr-col-8">
+        <!-- {{formbrefer.value | json}} -->
+        <!-- <br><hr> -->
+        <form clrForm [formGroup]="formbrefer" (ngSubmit)="onSubmit()">
+            <clr-input-container>
+                <label>
+                    เลข refer เข้า
+                </label>
+                <input formControlName="nrefer_no" [value]="nrefer.nrefer_no" clrInput disabled>
+            </clr-input-container>
+            <clr-input-container>
+                <label>
+                    เลข refer กลับ
+                </label>
+                <input formControlName="brefer_no" clrInput>
+            </clr-input-container>
+            <clr-input-container>
+                <label>
+                    เลขสถานพยาบาลปลายทาง
+                </label>
+                <input formControlName="hos_out" clrInput>
+            </clr-input-container>
+            <clr-input-container>
+                <label>
+                    หมอที่ส่งกลับ
+                </label>
+                <input formControlName="empId" (focusout)="checkEmp()" clrInput>
+                <clr-control-helper>{{emp.title}}{{emp.firstname}} {{emp.surname}}</clr-control-helper>
+            </clr-input-container>
+            <clr-input-container>
+                <label>
+                    ประเภทการส่งกลับ
+                </label>
+                <input formControlName="type_out" clrInput>
+            </clr-input-container>
+            <clr-input-container>
+                <label>
+                    รถการส่งกลับ
+                </label>
+                <input formControlName="type_car" clrInput>
+            </clr-input-container>
+            <clr-input-container>
+                <label>
+                    วันที่ส่งกลับ
+                </label>
+                <input formControlName="date_out" [value]="nrefer.today" clrInput>
+            </clr-input-container>
+            <button class="btn btn-sm" type="submit">submit</button>
+        </form>
+    </div>
+</div>
